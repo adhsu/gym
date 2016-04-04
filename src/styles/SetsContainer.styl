@@ -1,0 +1,154 @@
+.sets-container
+  position fixed
+  bottom 20px
+  right 20px
+  width 350px
+  background-color transparent
+  max-height 650px
+  overflow-y auto
+
+
+.sets-item
+  overflow hidden
+  border-radius 2px
+  margin-bottom 12px
+  &:last-child
+    margin-bottom 0
+  
+.set-item-row
+  background-color white
+  
+.set-next
+  background-color #36B67D //green
+  color white
+  height 66px
+  line-height 66px
+  font-size 24px
+  text-align center
+
+.set-next-icon
+  width 28px
+  margin-left 8px
+  vertical-align middle
+  margin-top -4px
+
+.set-trainer-tips
+  padding 12px
+  p
+    font-size 14px
+    line-height 22px
+    color rgba(black, 72%)
+
+.set-trainer-title
+  font-size 14px
+  font-weight 300
+  color rgba(black, 54%)
+
+.set-trainer-avatar
+  width 26px
+  vertical-align middle
+  margin-right 6px
+  
+
+.set
+  background-color white
+
+.set-unfinished
+  opacity 0.35
+
+.set-completed
+  background-color #36B67D //green
+  color white !important
+  
+  .set-number
+  .set-reps
+  .set-weight
+  .set-sublabel
+    color white !important
+    text-align center
+  
+  .set-number
+    display none
+  
+  .set-reps
+  .set-weight
+    flex-grow 3 !important
+    
+  .set-completed-marker
+    flex-grow 1
+    text-align center
+    .set-completed-icon
+      width 22px
+      vertical-align middle
+
+.set-active
+  .set-item-row
+    text-align center
+    height 70px
+    line-height 70px
+    border-bottom 1px solid #E7E7E7
+    &:last-child
+      border-bottom 0
+    
+    &.set-item-row-gray
+      background-color #F4F4F4
+    
+  .set-number
+    font-size 14px
+    font-weight 500
+    color rgba(black, 54%)
+  
+  .set-reps
+  .set-weight
+    font-size 36px
+    color black
+  
+  .set-sublabel
+    font-size 14px
+    font-weight 500
+    color rgba(black, 54%)
+  
+  .set-next-big
+    height 160px
+    line-height 160px
+    background-color #36B67D //green
+    text-align center
+    
+    .set-next-big-icon
+      width 57px
+      vertical-align middle
+
+.set-collapsed
+  display flex
+  height 70px
+  line-height 70px
+  
+  .set-number
+    flex 1
+    font-size 14px
+    font-weight 500
+    color black
+    opacity 0.54
+    padding-left 20px
+    
+  .set-reps
+  .set-weight
+    flex 1
+    font-size 36px
+    color black
+    
+  .set-sublabel
+    font-size 14px
+    font-weight 500
+    color black
+    opacity 0.54
+    margin-left 5px    
+
+.set-finish
+  text-align center
+  height 66px
+  line-height 66px
+  background-color #DE5A5A
+  color white
+  font-size 24px
+  
