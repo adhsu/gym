@@ -10,6 +10,7 @@
   box-sizing border-box
   
 body
+  background-color black
   background-color #E4DEE0
   font-family 'Helvetica Neue', sans-serif
 
@@ -20,3 +21,41 @@ body
   font-size 48px
   font-weight 300
   color black
+  
+
+
+.screen
+  background-color #E4DEE0
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+  transition transform 0.25s ease-in-out
+    
+  &.screen-zoom-out  
+    transform scale(0.95)
+    
+
+.main-container
+  position absolute
+  top 0
+  right 0
+  bottom 0
+  left 0
+
+.workout-summary-backdrop
+  background-color rgba(black, 20%)
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+
+.workout-summary-bar
+  position fixed
+  width 300px
+  background-color white
+  right 0
+  top 0
+  bottom 0

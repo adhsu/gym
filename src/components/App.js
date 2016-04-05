@@ -6,6 +6,7 @@ import ExerciseContainer from './ExerciseContainer'
 import SetsContainer from './SetsContainer'
 import Waiting from './Waiting'
 import Finished from './Finished'
+import WorkoutSummary from './WorkoutSummary'
 
 export default class App extends React.Component {
 
@@ -20,15 +21,30 @@ export default class App extends React.Component {
       },
 
       currentWorkout: {
+        showWorkoutSummary: false,
         waiting: true,
         finished: false,
-        currentExercise: 0,
+        currentExercise: 1,
         currentSet: null // null if you haven't started yet
       },
 
       // workout is an array of exercise objects
       workout: [
         {
+          id: 0,
+          machine: "Free Weight Station 3",
+          name: "Bulgarian Split Squat",
+          description: "3 sets heavy weights",
+          tips: "Split squats are awesome.",
+          sets: [
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false}
+          ],
+          completed: true
+        },
+        {
+          id: 1,
           machine: "Free Weight Station 2",
           name: "Dumbbell Chest Press",
           description: "3 power sets and 1 rep set.",
@@ -39,25 +55,60 @@ export default class App extends React.Component {
             {reps: 6, weight: 165, completed: false},
             {reps: 8, weight: 195, completed: false},
             {reps: 12, weight: 135, completed: false}
-          ]
+          ],
+          completed: false
         },
         {
+          id: 2,
           machine: "Free Weight Station 3",
-          name: "Tricep Kickbacks",
-          description: "5 sets",
+          name: "Seated Dumbbell Curl",
+          description: "We are going for the record!",
           tips: "Keep your back parallel to the ground, elbow against your body, hinge from the elbow. Everything should stay tight.",
           sets: [
             {reps: 8, weight: 25, completed: false},
             {reps: 8, weight: 25, completed: false},
             {reps: 8, weight: 25, completed: false}
-          ]
+          ],
+          completed: false
+        },
+        {
+          id: 3,
+          machine: "Free Weight Station 3",
+          name: "Inverted Rows",
+          description: "Until fail",
+          tips: "Split squats are awesome.",
+          sets: [
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false}
+          ],
+          completed: false
+        },
+        {
+          id: 4,
+          machine: "Free Weight Station 3",
+          name: "Ab Wheel Rollout",
+          description: "1 minute long sets",
+          tips: "Split squats are awesome.",
+          sets: [
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false},
+            {reps: 8, weight: 25, completed: false}
+          ],
+          completed: false
         }
       ]
     }
 
+    this.toggleWorkoutSummary = this.toggleWorkoutSummary.bind(this)
     this.finish = this.finish.bind(this)
     this.identify = this.identify.bind(this)
     this.nextSet = this.nextSet.bind(this)
+  }
+
+  toggleWorkoutSummary() {
+    this.setState({currentWorkout: {...this.state.currentWorkout, showWorkoutSummary: !this.state.currentWorkout.showWorkoutSummary}})
+    this.setState
   }
 
   finish() {
@@ -97,16 +148,14 @@ export default class App extends React.Component {
 
   renderFinished() {
     return (
-      <div>
-        <Finished/>
-      </div>
+      <Finished/>
     )
   }
 
   renderMain() {
     return (
-      <div>
-        <ExerciseContainer/>
+      <div className="main-container">
+        <ExerciseContainer {...this.state} />
         <SetsContainer {...this.state} nextSet={this.nextSet} finish={this.finish} />
       </div>
     )
@@ -119,9 +168,14 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <TopBar {...this.state} />
-        {this.state.currentWorkout.finished ? this.renderFinished() : this.renderMain()}
+        <div className={"screen " + 
+          (this.state.currentWorkout.showWorkoutSummary ? "screen-zoom-out" : null)}>
+          <TopBar {...this.state} toggle={this.toggleWorkoutSummary} />
+          {this.state.currentWorkout.finished ? this.renderFinished() : this.renderMain()}
+        </div>
 
+        { this.state.currentWorkout.showWorkoutSummary ? <WorkoutSummary toggle={this.toggleWorkoutSummary} {...this.state}/> : null}
+        
       </div> 
     )
   }

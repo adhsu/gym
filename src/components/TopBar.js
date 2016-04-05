@@ -7,7 +7,7 @@ const iconHeartbeatImg = require('../static/images/icon-heartbeat@2x.png')
 export default class TopBar extends React.Component {
   render() {
     
-    const {user} = this.props
+    const {user, toggle} = this.props
 
     return (
       <div className="top-bar">
@@ -28,17 +28,19 @@ export default class TopBar extends React.Component {
 
         <div className="top-bar-section top-bar-right">
           
-          <div className="workout-info">
-            <div className="workout-name">Today's workout</div>
-            <div className="workout-timer">43:25</div>
-          </div>
+          <span onClick={e=>toggle()}>
+            <div className="workout-info">
+              <div className="workout-name">Today's workout</div>
+              <div className="workout-timer">43:25</div>
+            </div>
 
-          <div className="workout-progress">
-            <CircularProgress
-              strokeWidth="6"
-              radius="28"
-              percentage="75" />
-          </div>
+            <div className="workout-progress">
+              <CircularProgress
+                strokeWidth="6"
+                radius="28"
+                percentage="75" />
+            </div>
+          </span>
 
 
         </div>
