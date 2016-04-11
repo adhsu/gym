@@ -1,5 +1,5 @@
 import React from 'react'
-const waitingImage = require('../static/images/waiting-image.png')
+const waitingImage = require('../static/images/andrew.png')
 
 export default class Waiting extends React.Component {
   
@@ -20,9 +20,17 @@ export default class Waiting extends React.Component {
     const w = workout[currentWorkout.currentExercise]
 
     return (
-      <div>
+      <div className="waiting-container">
         
-        <img className="waiting-image" src={waitingImage}/>
+        <div className="waiting-image-container">
+          <div className="waiting-image-wrapper">
+            <img className="waiting-image"
+              src={waitingImage}/>
+          </div>
+          
+          <div className="waiting-image-ring"></div>
+        </div>
+        
 
         <div className="waiting-text">
           <b>{w.machine}</b> is currently waiting for <b>{user.name}</b>.

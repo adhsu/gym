@@ -1,0 +1,135 @@
+
+.workout-summary-backdrop
+  background-color rgba(black, 20%)
+  position fixed
+  top 0
+  right 0
+  bottom 0
+  left 0
+
+.workout-summary-bar
+  position fixed
+  width 360px
+  background-color white
+  right 0
+  top 0
+  bottom 0
+  overflow-y auto
+  -webkit-overflow-scrolling: touch; /* lets it scroll lazy */
+  box-shadow -2px 0 4px rgba(0,0,0,0.15)
+
+
+.workout-summary-item
+  position relative
+  height 118px
+  border-bottom 1px solid rgba(black, 7%)
+  padding-top 36px
+  padding-left 110px
+  background-color white
+  &.active
+    background-color #f1f1f1
+  &.completed
+    .workout-summary-item-name
+      text-decoration line-through
+    .workout-summary-item-completed
+      display block
+  
+.workout-summary-item-name
+  font-size 18px
+  color rgba(black, 77%)
+  margin-bottom 4px
+  
+.workout-summary-item-description
+  font-size 14px
+  color rgba(#424242, 77%)
+  
+.workout-summary-item-image
+  position absolute
+  left 10px
+  top 15px
+  max-width 100px
+  max-height 85px
+
+.workout-summary-item-completed
+  display none
+  position absolute
+  right 30px
+  top 50px
+  img
+    width 22px  
+
+.workout-summary-top
+  height 90px
+  background-color #f1f1f1
+  text-align center
+  padding 0
+  margin-bottom 20px
+  padding-top 22px
+  
+.workout-summary-title
+  font-size 14px
+  color rgba(#383838, 77%)
+  margin-bottom 10px
+
+.workout-summary-stats
+  font-size 14px
+  color rgba(#383838, 77%)
+  
+  
+.workout-summary-box
+  display inline-block
+  vertical-align middle
+  width 12px
+  height 12px
+  border-radius 2px
+  border 1px solid #d15252
+  margin-left 4px  
+  &.filled
+    background-color #d15252 // red  
+
+.workout-summary-stats-section
+  margin-right 20px
+  > span
+    display inline-block
+    vertical-align middle
+  &:last-child
+    margin-right 0
+
+.summary-transition-enter
+  .workout-summary-backdrop
+    opacity 0
+  
+  .workout-summary-bar
+    right -360px
+    opacity 0
+    
+  &.summary-transition-enter-active
+    .workout-summary-backdrop
+      opacity 1
+      transition opacity 350ms ease-in-out
+    
+    .workout-summary-bar
+      right 0
+      opacity 1
+      transition all 250ms ease-in-out
+    
+.summary-transition-leave
+  .workout-summary-backdrop
+    opacity 1
+  
+  .workout-summary-bar
+    right 0
+    opacity 1
+  
+  &.summary-transition-leave-active
+    .workout-summary-backdrop
+      opacity 0
+      transition opacity 200ms ease-in
+    
+    .workout-summary-bar
+      right -50px
+      opacity 0
+      transition all 250ms ease-in-out
+    
+    
+

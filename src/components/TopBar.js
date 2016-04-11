@@ -1,5 +1,6 @@
 import React from 'react'
 import CircularProgress from './CircularProgress'
+import StopWatch from './StopWatch'
 
 const avatarImg = require('../static/images/avatar@2x.png')
 const iconHeartbeatImg = require('../static/images/icon-heartbeat@2x.png')
@@ -28,10 +29,14 @@ export default class TopBar extends React.Component {
 
         <div className="top-bar-section top-bar-right">
           
+          
+
           <span onClick={e=>toggle()}>
             <div className="workout-info">
               <div className="workout-name">Today's workout</div>
-              <div className="workout-timer">43:25</div>
+              <div className="workout-timer">
+                <StopWatch/>
+              </div>
             </div>
 
             <div className="workout-progress">

@@ -4,8 +4,10 @@
   right 20px
   width 350px
   background-color transparent
-  max-height 650px
+  max-height 600px
   overflow-y auto
+  -webkit-overflow-scrolling: touch; /* lets it scroll lazy */
+
 
 
 .sets-item
@@ -39,10 +41,24 @@
     line-height 22px
     color rgba(black, 72%)
 
+      
+.set-trainer-tips-ul
+  font-size 16px
+  line-height 24px
+  color rgba(black, 72%)
+  padding-left 26px
+  > li
+    margin-bottom 5px
+    &:last-child
+      margin-bottom 0
+
+
 .set-trainer-title
-  font-size 14px
+  font-size 16px
   font-weight 300
   color rgba(black, 54%)
+  > *
+    vertical-align middle
 
 .set-trainer-avatar
   width 26px
@@ -83,6 +99,7 @@
 
 .set-active
   .set-item-row
+    position relative
     text-align center
     height 70px
     line-height 70px
@@ -95,8 +112,23 @@
     
   .set-number
     font-size 14px
+    line-height 22px
     font-weight 500
     color rgba(black, 54%)
+    display table
+    
+    width 100%
+    
+    .set-number-inner
+      display table-cell
+      vertical-align middle
+      text-align center
+    
+    .set-number-note
+      color rgba(black, 75%)
+      font-size 16px
+      
+      
   
   .set-reps
   .set-weight
@@ -107,7 +139,11 @@
     font-size 14px
     font-weight 500
     color rgba(black, 54%)
-  
+    position absolute
+    bottom 18px
+    left 62%
+    line-height 20px
+    
   .set-next-big
     height 160px
     line-height 160px
@@ -151,4 +187,26 @@
   background-color #DE5A5A
   color white
   font-size 24px
+
+.set-adjust-btn
+  height 40px
+  line-height 34px
+  width 40px
+  
+  color rgba(black, 10%)
+  border-radius 1px solid black
+  text-decoration none
+  
+.set-adjust-minus
+  position absolute
+  top 15px
+  left 10px
+  font-size 24px
+  
+
+.set-adjust-plus
+  position absolute
+  top 15px
+  right 10px
+  font-size 34px
   
