@@ -13,9 +13,9 @@ export default class ExerciseContainer extends React.Component {
         <div className="exercise-name h1">{w.name}</div>
         <div className="exercise-description">{w.description}</div>
 
-        <video id="exercise-video" className="exercise-video" preload="auto" width="640" height="360" autoPlay loop muted controls>
-          {/* <source src={`./src/static/videos/${w.id}.mp4`} type="video/mp4" /> */}
-          <source src={`videos/${w.id}.mp4`} type="video/mp4" />
+        <video id="exercise-video" className="exercise-video" preload="auto" width="640" height="360" autoPlay loop muted>
+          <source src={`./src/static/videos/${w.id}.mp4`} type="video/mp4" />
+          {/* <source src={`videos/${w.id}.mp4`} type="video/mp4" /> */}
         </video>
 
       </div> 

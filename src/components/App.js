@@ -27,10 +27,11 @@ export default class App extends React.Component {
 
       currentWorkout: {
         showWorkoutSummary: false,
-        waiting: true,
+        waiting: false,
         finished: false,
         currentExercise: 0,
-        currentSet: 0 // null if you haven't started yet
+        currentSet: 0, // null if you haven't started yet
+        resting: false
       },
 
       // workout is an array of exercise objects
@@ -46,9 +47,9 @@ export default class App extends React.Component {
             "Pull until bar touches your upper chest",
             "Focus on squeezing back muscles at the top"],
           sets: [
-            {reps: 10, weight: 90, completed: false},
-            {reps: 10, weight: 90, completed: false},
-            {reps: 10, weight: 90, completed: false},
+            {reps: 10, weight: 90, completed: false, rest: 30},
+            {reps: 10, weight: 90, completed: false, rest: 30},
+            {reps: 10, weight: 90, completed: false, rest: 30},
             {reps: 10, weight: 90, completed: false},
           ],
           completed: false
@@ -202,12 +203,21 @@ export default class App extends React.Component {
 
   goToExercise(id) {
     // Jump to specific exercise id
-
+    console.log('going to exercise id', id)
+    const newState = update(this.state, {
+      currentWorkout: {
+        showWorkoutSummary: {$set: false},
+        waiting: {$set: false},
+        finished: {$set: false},
+        currentExercise: {$set: id},
+        currentSet: {$set: null} // null if you haven't started yet
+      }
+    })
+    this.setState(newState)
   }
 
   adjustSet(type, number) {
     console.log('adjusting ', type, number)
-
     const newState = update(this.state, {
       workout: {[this.state.currentWorkout.currentExercise]: {
         sets: {[this.state.currentWorkout.currentSet]: {
@@ -215,10 +225,7 @@ export default class App extends React.Component {
         }}
       }}
     })
-
     this.setState(newState)
-
-
   }
 
   finish() {
@@ -235,6 +242,8 @@ export default class App extends React.Component {
 
   nextExercise() {
     // advancing to the next exercise
+    const curE = this.state.currentWorkout.currentExercise
+    const resting = this.state.currentWorkout.resting
 
     const newState = update(this.state, {
       currentWorkout: {
@@ -245,7 +254,7 @@ export default class App extends React.Component {
         currentSet: {$set: null}
       },
       workout: {
-        [this.state.currentWorkout.currentExercise]: {
+        [curE]: {
           completed: {$set: true}
         }
       }
@@ -261,9 +270,12 @@ export default class App extends React.Component {
   }
 
   nextSet() {
-    const e = this.state.currentWorkout.currentExercise
 
-    if (this.state.currentWorkout.currentSet==null) {
+    const curE = this.state.currentWorkout.currentExercise
+    const curS = this.state.currentWorkout.currentSet
+    const resting = this.state.currentWorkout.resting
+
+    if (curS==null) {
       const newState = update(this.state, {
         currentWorkout: {
           currentSet: {$set: 0}
@@ -271,43 +283,50 @@ export default class App extends React.Component {
       })
       this.setState(newState)
     } else {
-      const newState = update(this.state, {
-        currentWorkout: {
-          currentSet: {$apply: x => x+1}
-        },
-        workout: {[this.state.currentWorkout.currentExercise]: {
-          sets: {[this.state.currentWorkout.currentSet]: {
-            completed: {$set: true}
+      
+      if (!resting) {
+        const newState = update(this.state, {
+          currentWorkout: {
+            resting: {$set: true}
+          },
+          workout: {[curE]: {
+            sets: {[curS]: {
+              completed: {$set: true}
+            }}
           }}
-        }}
-      })
-      this.setState(newState)
+        })
+        this.setState(newState)
+      }
 
+      // const newState = update(this.state, {
+      //   currentWorkout: {
+      //     currentSet: {$apply: x => x+1}
+      //   },
+      //   workout: {[curE]: {
+      //     sets: {[curS]: {
+      //       completed: {$set: true}
+      //     }}
+      //   }}
+      // })
+      // this.setState(newState)
+
+      
 
       setTimeout(()=> {
-
-        if (this.state.currentWorkout.currentSet <= this.state.workout[this.state.currentWorkout.currentExercise].sets.length-1) {
-          
+        if (curS <= this.state.workout[curE].sets.length-1) {
           var active = document.getElementById('set-active')
           var container = document.getElementById('sets-container')
           var activeRect = active.getBoundingClientRect()
           var containerRect = container.getBoundingClientRect()
-
           var delta = activeRect.bottom - containerRect.bottom
           console.log('delta is ', delta)
-
           if (delta > 0) {
             // container.scrollTop += delta
             $(container).animate({scrollTop: container.scrollTop+delta})
           }
-
-        }
-        
+        }   
       }, 10)
-      
-
     }
-    
   }
 
   renderFinished() {
@@ -342,7 +361,7 @@ export default class App extends React.Component {
 
 
         <ReactCSSTransitionGroup transitionName="summary-transition" transitionEnterTimeout={350} transitionLeaveTimeout={200}>
-          { this.state.currentWorkout.showWorkoutSummary ? <WorkoutSummary toggle={this.toggleWorkoutSummary} {...this.state}/> : null}
+          { this.state.currentWorkout.showWorkoutSummary ? <WorkoutSummary toggle={this.toggleWorkoutSummary} goToExercise={this.goToExercise} {...this.state}/> : null}
         </ReactCSSTransitionGroup>
         
       </div> 
