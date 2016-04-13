@@ -1,12 +1,14 @@
+import 'react-fastclick'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 
-import rootReducer from './reducers'
-import App from './components/App'
+import reducers from './reducers/index'
+import App from './containers/App'
 require('./styles/main.styl')
 
+const rootReducer = combineReducers(Object.assign({}, reducers));
 let store = createStore(rootReducer)
 
 ReactDOM.render(
@@ -15,3 +17,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('app')
 )
+

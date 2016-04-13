@@ -1,4 +1,5 @@
 import React from 'react'
+import CircularProgress from './CircularProgress'
 
 export default class StopWatch extends React.Component {
 
@@ -12,7 +13,6 @@ export default class StopWatch extends React.Component {
 
     this.tick = this.tick.bind(this)
     this.onClick= this.onClick.bind(this)
-    this.reset = this.reset.bind(this)
 
   }
 
@@ -26,21 +26,19 @@ export default class StopWatch extends React.Component {
   }
 
   tick() {
-    var elapsed = Date.now() - this.state.start + this.state.diff
-    this.setState({elapsed: elapsed})
+    this.setState({elapsed: this.state.elapsed+1})
   }
 
   getTimeSpan(elapsed) { // 754567(ms) -> "12:34.567"
-    var m = String(Math.floor(elapsed/1000/60)+100).substring(1);
-    var s = String(Math.floor((elapsed%(1000*60))/1000)+100).substring(1);
-    var ms = String(elapsed % 1000 + 1000).substring(1);
+    var m = String(Math.floor(elapsed/60)+100).substring(1);
+    var s = String(Math.floor((elapsed%(60)))+100).substring(1);
     return `${m}:${s}`
     // return m+":"+s+"."+ms;
   }
 
   onClick() {
     if(!this.state.isStart) { // start
-      var timer = setInterval(this.tick, 33);
+      var timer = setInterval(this.tick, 1000);
       this.setState({
         isStart: true,
         timer: timer,
@@ -56,26 +54,32 @@ export default class StopWatch extends React.Component {
     }
   }
   
-  reset() {
-    clearInterval(this.state.timer);
-    this.setState({
-      timer: undefined,
-      isStart: false,
-      elapsed: 0,
-      diff: 0
-    })
-  }
+  
 
   render() {
+    const {total} = this.props
+
+    const percentage = Math.floor(100*this.state.elapsed/(total*60))
 
     return (
-      <span>
-        {this.getTimeSpan(this.state.elapsed)}
-        {/* <button onClick={this.onClick} style={style.button}>
-          {this.state.isStart ? "pause" : "start"}
-        </button>
-        <button onClick={this.reset} style={style.button}>reset</button> */}
-      </span>
+      <div>
+        <div className="workout-info">
+          <div className="workout-name">
+            Today's workout
+          </div>
+          <div className="workout-timer">
+            {this.getTimeSpan(this.state.elapsed)}
+          </div>
+        </div>
+
+        <div className="workout-progress">
+          <CircularProgress
+            strokeWidth="6"
+            radius="28"
+            percentage={percentage} />  
+        </div>
+        
+      </div>
     )
   }
 }

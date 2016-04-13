@@ -10,16 +10,22 @@ export default class WorkoutSummaryItem extends React.Component {
   }
 
   handleClick(e, id) {
+    const {dispatch, exercise, session, goToExercise, toggleShowWorkout} = this.props
     e.preventDefault()
-    const {goToExercise} = this.props
-    goToExercise(id)
+
+    if (exercise.id==session.exercise) {
+      dispatch(toggleShowWorkout())
+    } else {
+      dispatch(goToExercise(id))
+    }
+    
   }
 
   render() {
-    const {exercise, currentWorkout, workout} = this.props
+    const {exercise, session} = this.props
     return (
       <div className={"workout-summary-item " +
-        (exercise.id==currentWorkout.currentExercise ? 'active ' : '') +
+        (exercise.id==session.exercise ? 'active ' : '') +
         (exercise.completed ? 'completed ' : '')}
         onClick={e=>this.handleClick(e, exercise.id)}>
         <img className="workout-summary-item-image" 

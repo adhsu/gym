@@ -1,25 +1,63 @@
 .exercise-container
   position fixed
-  left 65px
-  top 135px
-  width 500px
+  bottom 20px
+  left 40px
+  height 620px
+  width 550px
+  background-color rgba(black, 1%)
   
 .exercise-name
-  margin-bottom 14px
+  text-align center
+  font-weight 500
+  font-size 24px
+  line-height 60px
+  color rgba(black, 77%)
+  margin-bottom 15px
   
 .exercise-description
-  font-size 24px
-  font-weight 300
-  color #7D7D7D
+  font-size 44px
+  font-weight 400
+  color rgba(black, 1)
 
 .exercise-image
   width 655px
   margin-left -105px
   margin-top 30px
 
+.exercise-video-wrapper
+  width 550px
+  height 310px
+  border-radius 2px
+  margin-bottom 30px
+  overflow hidden
+  background-color rgba(black, 90%)
+  
 .exercise-video
   height auto
-  width 540px
-  margin-top 50px
-  border-radius 2px
+  width 100%
   
+
+.exercise-tips-ul
+  margin 0
+  margin-top 15px
+  padding 0
+  
+  list-style none
+  font-size 24px
+  font-weight 400
+  line-height 30px
+  color rgba(black, 72%)
+  
+  > li
+    position relative
+    padding-left 20px
+    margin-bottom 10px
+    &:last-child
+      margin-bottom 0
+    &:before
+      position absolute
+      top 0
+      left 0
+      content "•"
+      font-size 15px
+      

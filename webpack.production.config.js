@@ -33,7 +33,7 @@ module.exports = {
         loader: 'babel',
         query: {presets: ['es2015', 'react', 'stage-0']} },
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
-      { test: /\.(png|jpg|jpeg|otf)$/, loader: 'url-loader?limit=10000' },
+      { test: /\.(png|jpg|jpeg|otf|mp4)$/, loader: 'url-loader?limit=800000' },
       { test: /\.woff$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
       { test: /\.ttf$/, loader: "url-loader?limit=10000&mimetype=application/octet-stream" },
       { test: /\.eot$/, loader: "file-loader" },

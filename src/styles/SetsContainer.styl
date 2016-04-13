@@ -2,9 +2,9 @@
   position fixed
   bottom 20px
   right 20px
-  width 350px
+  width 370px
   background-color transparent
-  max-height 600px
+  max-height 620px
   overflow-y auto
   -webkit-overflow-scrolling: touch; /* lets it scroll lazy */
 
@@ -19,20 +19,45 @@
   
 .set-item-row
   background-color white
-  
-.set-next
+
+
+.set-start-first
   background-color #36B67D //green
   color white
-  height 66px
-  line-height 66px
   font-size 24px
+  line-height 36px
   text-align center
+  padding 60px 20px
+  transition all 500ms
 
-.set-next-icon
+.set-start-first-done
+  background-color rgba(white, 0%)
+  color black
+  padding 10px
+  
+  .set-start-first-icon
+    width 0
+    opacity 0
+    
+.set-start-first-icon
   width 28px
   margin-left 8px
   vertical-align middle
   margin-top -4px
+  transition all 250ms
+
+.set-next-big
+  background-color #36B67D //green
+  color white
+  font-size 24px
+  line-height 36px
+  text-align center
+  padding 60px 20px
+  
+  .set-next-big-icon
+    width 57px
+    vertical-align middle
+
 
 .set-trainer-tips
   padding 12px
@@ -42,16 +67,8 @@
     color rgba(black, 72%)
 
       
-.set-trainer-tips-ul
-  font-size 16px
-  line-height 24px
-  color rgba(black, 72%)
-  padding-left 26px
-  > li
-    margin-bottom 5px
-    &:last-child
-      margin-bottom 0
 
+      
 
 .set-trainer-title
   font-size 16px
@@ -68,11 +85,16 @@
 
 .set
   background-color white
+  overflow hidden
+  border-radius 2px
 
 .set-unfinished
   opacity 0.35
+  .set-completed-marker
+    display none
 
 .set-completed
+  opacity 0.6
   background-color #36B67D //green
   color white !important
   
@@ -94,7 +116,7 @@
     flex-grow 1
     text-align center
     .set-completed-icon
-      width 22px
+      width 26px
       vertical-align middle
 
 .set-active
@@ -126,14 +148,15 @@
     
     .set-number-note
       color rgba(black, 75%)
-      font-size 16px
-      
-      
+      font-size 16px    
   
   .set-reps
   .set-weight
     font-size 36px
     color black
+
+  .set-reps-none
+    display none
   
   .set-sublabel
     font-size 14px
@@ -141,18 +164,9 @@
     color rgba(black, 54%)
     position absolute
     bottom 18px
-    left 62%
+    left 60%
     line-height 20px
     
-  .set-next-big
-    height 160px
-    line-height 160px
-    background-color #36B67D //green
-    text-align center
-    
-    .set-next-big-icon
-      width 57px
-      vertical-align middle
 
 .set-collapsed
   display flex
@@ -173,6 +187,7 @@
     font-size 36px
     color black
     
+    
   .set-sublabel
     font-size 14px
     font-weight 500
@@ -189,9 +204,9 @@
   font-size 24px
 
 .set-adjust-btn
-  height 40px
-  line-height 34px
-  width 40px
+  height 70px
+  line-height 64px
+  width 70px
   
   color rgba(black, 10%)
   border-radius 1px solid black
@@ -199,14 +214,45 @@
   
 .set-adjust-minus
   position absolute
-  top 15px
-  left 10px
+  top 0px
+  left 0px
   font-size 24px
-  
 
 .set-adjust-plus
   position absolute
-  top 15px
-  right 10px
+  top 0px
+  right 0px
   font-size 34px
+
+.set-rest
+  position relative
+  height 130px
+  line-height 130px
+  margin-top 12px
+  text-align center
+  .set-rest-content
+    position relative
+    z-index 2
+    color rgba(black, 34%)
+    font-weight 500
+    font-size 14px
   
+    .set-rest-num
+      color black
+      font-size 36px
+      font-weight 400
+      vertical-align top
+      padding 0 5px
+      display inline-block
+  
+  .set-rest-inner
+    position absolute
+    z-index 1
+    top 0
+    left 0
+    bottom 0
+    width 50%
+    background-color rgba(#CDD4DB, 20%)
+    transition width 250ms linear
+
+
